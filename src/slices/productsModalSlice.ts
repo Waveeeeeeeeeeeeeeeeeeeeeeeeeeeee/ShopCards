@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { IProductModalState } from "../interfaces/Product.interface/ProductModalState.interface";
 
-const initialState = {
+const initialState: IProductModalState = {
 	isOpen: false,
 };
 

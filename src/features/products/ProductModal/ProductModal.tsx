@@ -3,12 +3,15 @@ import { createPortal } from "react-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { closeModal } from "../../../slices/productsModalSlice";
 import ProductModalForm from "./ProductModalForm/ProductModalForm";
+import { RootState } from "../../../store/store";
 
 export function ProductModal() {
 	const dispatch = useDispatch();
 	const domNode = document.getElementById("overlays");
 
-	const isOpen = useSelector((state: unknown) => state.productsModal.isOpen);
+	const isOpen = useSelector(
+		(state: RootState) => state.productsModal.isOpen,
+	);
 
 	return (
 		<>

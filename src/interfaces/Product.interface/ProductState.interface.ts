@@ -1,4 +1,4 @@
-import { IProduct } from "../models/ProductModel";
+import { IProduct } from "../../models/ProductModel";
 
 export interface IProductState {
 	items: IProduct[];
