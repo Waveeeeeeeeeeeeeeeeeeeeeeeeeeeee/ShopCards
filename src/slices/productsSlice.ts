@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchProductsThunk } from "../thunks/fetchProductsThunk";
 import { IProductList } from "../models/ProductListModel";
 import { IProductState } from "../interfaces/Product.interface/ProductState.interface";
-import { IProduct } from "../models/ProductModel";
+import { IProductIsEditable } from "../models/ProductIsEditableModel";
 
 const initialState: IProductState = {
 	items: [],
@@ -15,9 +15,18 @@ const productSlice = createSlice({
 	name: "products",
 	initialState,
 	reducers: {
-		addProduct(state, action: PayloadAction<IProduct>) {
+		addProduct(state, action: PayloadAction<IProductIsEditable>) {
 			const oldProducts = state.items;
 			state.items = [action.payload, ...oldProducts];
+		},
+		updateProduct(state, action: PayloadAction<IProductIsEditable>) {
+			const oldProducts = state.items;
+			state.items = oldProducts.map((product) => {
+				if (product.id === action.payload.id) {
+					return action.payload;
+				}
+				return product;
+			});
 		},
 	},
 	extraReducers: (builder) => {
@@ -40,5 +49,5 @@ const productSlice = createSlice({
 	},
 });
 
-export const { addProduct } = productSlice.actions;
+export const { addProduct, updateProduct } = productSlice.actions;
 export default productSlice.reducer;

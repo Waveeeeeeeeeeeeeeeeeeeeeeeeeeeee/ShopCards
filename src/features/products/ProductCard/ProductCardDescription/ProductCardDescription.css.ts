@@ -6,7 +6,10 @@ export const productCardDescriptionStyles = style({
 	textAlign: "center",
 	lineHeight: "1.5",
 	marginBottom: "16px",
-	textOverflow: "ellipsis",
+	whiteSpace: "normal", // Обеспечивает перенос текста на новую строку
+	overflow: "hidden", // Прячет текст, выходящий за пределы
+	textOverflow: "ellipsis", // Добавляет многоточие в случае переполнения
 	display: "flex",
 	justifyContent: "center",
+	width: "300px",
 });

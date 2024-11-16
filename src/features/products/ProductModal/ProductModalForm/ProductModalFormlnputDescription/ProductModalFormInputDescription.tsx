@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { OnChangeEventType } from "../../../../../types/events.types/change.event.type";
-import { InputVariations } from "../../../../../interfaces/Input.interface/IInputVariations.interface";
+import { InputVariations } from "../../../../../interfaces/Input.interface/InputVariations.interface";
 import { Text } from "../../../../../components/Input/Text/Text";
 import { useContext } from "react";
 import { FormContext } from "../../../../../contexts/FormContext";

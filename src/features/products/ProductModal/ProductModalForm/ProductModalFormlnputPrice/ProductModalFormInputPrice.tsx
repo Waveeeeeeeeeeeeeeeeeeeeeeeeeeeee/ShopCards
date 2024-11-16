@@ -1,5 +1,5 @@
 import { Number } from "../../../../../components/Input/Number/Number";
-import { InputVariations } from "../../../../../interfaces/Input.interface/IInputVariations.interface";
+import { InputVariations } from "../../../../../interfaces/Input.interface/InputVariations.interface";
 import { useState, useContext } from "react";
 import { OnChangeEventType } from "../../../../../types/events.types/change.event.type";
 import { FormContext } from "../../../../../contexts/FormContext";

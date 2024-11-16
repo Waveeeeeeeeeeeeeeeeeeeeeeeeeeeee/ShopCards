@@ -6,4 +6,8 @@ export const productCardTitleStyles = style({
 	color: "#333",
 	textAlign: "center",
 	marginBottom: "8px",
+	whiteSpace: "normal", // Обеспечивает перенос текста на новую строку
+	overflow: "hidden", // Прячет текст, выходящий за пределы
+	textOverflow: "ellipsis", // Добавляет многоточие в случае переполнения
+	width: "300px",
 });

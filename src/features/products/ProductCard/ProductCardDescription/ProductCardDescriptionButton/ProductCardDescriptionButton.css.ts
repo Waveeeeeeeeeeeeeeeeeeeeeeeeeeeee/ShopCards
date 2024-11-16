@@ -12,6 +12,7 @@ export const productCardDescriptionButtonStyles = style({
 	cursor: "pointer",
 	textAlign: "center",
 	textDecoration: "none",
+	marginBottom: "8px",
 	transition: "background-color 0.3s ease, transform 0.2s ease",
 	":hover": {
 		backgroundColor: "#e64a19", // Более тёмный синий при наведении

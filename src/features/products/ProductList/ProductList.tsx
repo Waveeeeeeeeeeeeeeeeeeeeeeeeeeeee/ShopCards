@@ -1,9 +1,10 @@
 import React from "react";
 import { listContainer } from "./ProductList.css";
 import { useProducts } from "../../../hooks/useProducts";
-import { IProduct } from "../../../models//ProductModel";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { ProductListPreloader } from "./ProductListPreloader/ProductListPreloader";
+import { IProductIsEditable } from "../../../models/ProductIsEditableModel";
+import { IProductIsEditableList } from "../../../models/ProductListIsEditableModel";
 
 export const ProductList: React.FC = () => {
 	const {
@@ -20,10 +21,12 @@ export const ProductList: React.FC = () => {
 		return <div>Ошибка получения товаров: {error?.toString()}</div>;
 	}
 
+	const productIsEditable = products as IProductIsEditableList;
+
 	return (
 		<div>
 			<ul className={listContainer}>
-				{products.map((product: IProduct) => (
+				{productIsEditable.map((product: IProductIsEditable) => (
 					<ProductCard
 						key={product.id}
 						id={product.id}
@@ -31,6 +34,7 @@ export const ProductList: React.FC = () => {
 						description={product.description}
 						price={product.price}
 						image={product.image}
+						isEditable={product.isEditable}
 					/>
 				))}
 			</ul>

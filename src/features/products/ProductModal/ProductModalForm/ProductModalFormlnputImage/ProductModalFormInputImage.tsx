@@ -1,5 +1,5 @@
 import { File } from "../../../../../components/Input/File/File";
-import { InputVariations } from "../../../../../interfaces/Input.interface/IInputVariations.interface";
+import { InputVariations } from "../../../../../interfaces/Input.interface/InputVariations.interface";
 import { useContext } from "react";
 import { FormContext } from "../../../../../contexts/FormContext";
 import { toBase64 } from "../../../../../helpers/toBase64";

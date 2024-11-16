@@ -1,6 +1,6 @@
 import { InputHTMLAttributes } from "react";
-import { IInput } from "./IInput.interface";
-import { InputVariations } from "./IInputVariations.interface";
+import { IInput } from "./Input.interface";
+import { InputVariations } from "./InputVariations.interface";
 export interface INumberInput
 	extends IInput<InputHTMLAttributes<HTMLInputElement>> {
 	type: InputVariations.Number;

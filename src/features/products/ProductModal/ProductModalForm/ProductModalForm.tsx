@@ -14,16 +14,18 @@ import { FormContext } from "../../../../contexts/FormContext";
 import { addProduct } from "../../../../slices/productsSlice";
 import { closeModal } from "../../../../slices/productsModalSlice";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 
 const ProductModalForm = () => {
 	const dispatch = useDispatch();
 	const { formData } = useContext(FormContext);
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		console.log(formData);
 		dispatch(
 			addProduct({
 				...formData,
+				isEditable: true,
+				id: uuidv4(),
 			}),
 		);
 		dispatch(closeModal());
