@@ -4,7 +4,7 @@ import { IProduct } from "../models/ProductModel";
 
 export const FormProvider = ({ children }: { children: React.ReactNode }) => {
 	const [formData, setFormData] = useState<IProduct>({
-		id: Date.now(),
+		id: Date.now().toString(),
 		title: "",
 		price: 0,
 		description: "",
