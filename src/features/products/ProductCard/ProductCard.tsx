@@ -18,16 +18,16 @@ import { ProductCardPrice } from "./ProductCardPrice/ProductCardPrice";
 import { ProductCardCartButton } from "./ProductCardCartButton/ProductCardCartButton";
 import { ProductCardTitle } from "./ProductCardTitle/ProductCardTitle";
 import { IProductIsEditable } from "../../../models/ProductIsEditableModel";
-import { useReducer, useState } from "react";
+import { useReducer, useState, ChangeEvent } from "react";
 import { ProductCardEditable } from "./ProductCardEditable/ProductCardEditable";
 import { Text } from "../../../components/Input/Text/Text";
 import { File } from "../../../components/Input/File/File";
-import { Number } from "../../../components/Input/Number/Number";
+import { Number as NumberInput } from "../../../components/Input/Number/Number";
 import { InputVariations } from "../../../interfaces/Input.interface/InputVariations.interface";
 import { updateProduct } from "../../../slices/productsSlice";
 import { useDispatch } from "react-redux";
 import { addProductToCart } from "../../../slices/productsShopingCart";
-import { OnChangeEventType } from "../../../types/events.types/change.event.type";
+import { OnClickEventType } from "../../../types/events.types/click.event.type";
 
 export const ProductCard = ({
 	title,
@@ -37,7 +37,7 @@ export const ProductCard = ({
 	image,
 	isEditable,
 }: IProductIsEditable) => {
-	const [isEditableState, setIsEditableState] = useState(isEditable ?? false);
+	const [isEditableState] = useState(isEditable ?? false);
 	const [isEdit, setIsEdit] = useState(false);
 
 	const dispatch = useDispatch();
@@ -54,8 +54,21 @@ export const ProductCard = ({
 		initialState,
 	);
 
-	// Редюсер
-	function productInputReducer(state, action) {
+	type ProductState = {
+		title: string;
+		price: number | string;
+		description: string;
+		image: string | undefined;
+	};
+
+	type ProductAction = {
+		type: string;
+		payload: string;
+	};
+	function productInputReducer(
+		state: ProductState,
+		action: ProductAction,
+	): ProductState {
 		switch (action.type) {
 			case "title":
 				return { ...state, title: action.payload };
@@ -70,7 +83,10 @@ export const ProductCard = ({
 		}
 	}
 
-	const handleInputChange = function (e, type: string) {
+	const handleInputChange = function (
+		e: ChangeEvent<HTMLInputElement>,
+		type: string,
+	) {
 		const value = e.target.value;
 		let errorMessage = "";
 
@@ -106,7 +122,8 @@ export const ProductCard = ({
 				}
 				break;
 
-			case "file": { // Валидация для загрузки файла
+			case "file": {
+				// Валидация для загрузки файла
 				const file = e.target.files ? e.target.files[0] : null;
 				if (file) {
 					const fileTypes = ["image/png", "image/jpeg", "image/jpg"];
@@ -131,19 +148,22 @@ export const ProductCard = ({
 		}
 	};
 
-	function addGoodsToCart(e) {
+	const addGoodsToCart: OnClickEventType = function (e) {
 		e.preventDefault();
 		dispatch(addProductToCart({ id, name: title, price, image, count: 1 }));
-	}
+	};
 
-	function toEdit(e) {
+	const toEdit: OnClickEventType = function (e) {
 		e.preventDefault();
 		setIsEdit(!isEdit);
 		if (isEdit) {
 			const updatedProduct = {
 				id,
 				title: state.title,
-				price: state.price,
+				price:
+					typeof state.price === "string"
+						? Number(state.price)
+						: state.price,
 				description: state.description,
 				image: state.image,
 				isEditable: true,
@@ -151,7 +171,7 @@ export const ProductCard = ({
 
 			dispatch(updateProduct(updatedProduct));
 		}
-	}
+	};
 
 	return (
 		<li key={id} className={productCardStyles}>
@@ -168,7 +188,7 @@ export const ProductCard = ({
 						onChange={(e) => handleInputChange(e, "image")}
 						className={fileInputStyles}
 					/>
-					<Number
+					<NumberInput
 						type={InputVariations.Number}
 						value={state.price}
 						onChange={(e) => handleInputChange(e, "price")}
