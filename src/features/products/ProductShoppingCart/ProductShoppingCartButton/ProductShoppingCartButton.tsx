@@ -1,4 +1,4 @@
-import { iconContainer } from "./ProductShoppingCartButtom.css";
+import { iconContainer } from "./ProductShoppingCartButton.css";
 import { OnClickEventType } from "../../../../types/events.types/click.event.type";
 
 export const ProductShoppingCartButton = ({

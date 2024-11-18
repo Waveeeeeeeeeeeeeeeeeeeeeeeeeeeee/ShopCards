@@ -26,4 +26,19 @@ export const iconContainer = style({
 		backgroundColor: "#FF3D2A",
 		transform: "scale(1.1)",
 	},
+
+	"@media": {
+		"screen and (max-width: 480px)": {
+			width: "30px",
+			height: "30px",
+			top: "15px",
+			right: "15px",
+		},
+		"screen and (max-width: 320px)": {
+			width: "30px",
+			height: "30px",
+			top: "15px",
+			right: "15px",
+		},
+	},
 });
